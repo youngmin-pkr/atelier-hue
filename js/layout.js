@@ -42,7 +42,7 @@
   var curtainOn = page !== 'home' || fromNav;
 
   body.insertAdjacentHTML('afterbegin',
-    '<canvas id="silk" aria-hidden="true"></canvas>' + header);
+    '<div id="silk" aria-hidden="true"></div>' + header);
   // 푸터와 막은 본문이 다 만들어진 뒤(layout-end.js)에 붙인다.
   window.__ahEnd = footer + '<div class="curtain' + (curtainOn ? ' is-on' : '') + '" aria-hidden="true"></div>';
 })();

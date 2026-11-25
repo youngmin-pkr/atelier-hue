@@ -136,7 +136,7 @@
 .faq details p { padding: 0 0 22px; color: var(--mute); font-size: 0.9375rem; line-height: 1.8; word-break: keep-all; }
 
 /* ---------- 방문 ---------- */
-.visit--wide { grid-template-columns: 1fr; }
+.visit--wide { grid-template-columns: 1fr; grid-template-areas: "map" "info"; }
 .access { display: grid; gap: 0; border-top: 1px solid var(--line); }
 .access li { padding: 26px 0; border-bottom: 1px solid var(--line); }
 .access h3 { font-size: 1.125rem; font-weight: 300; }
@@ -178,8 +178,8 @@
   .steps .principles__no { font-size: 3rem; }
   .pager { grid-template-columns: 1fr 1fr; }
   .pager__next { text-align: right; }
-  .visit--wide { grid-template-columns: 2fr 1fr; }
-  .visit--wide .visit__map { min-height: 320px; }
+  .visit--wide { grid-template-columns: 2fr 1fr; grid-template-areas: "map info"; }
+  .visit--wide .visit__map { height: clamp(360px, 40vw, 560px); }
 }
 
 /* ---------- 움직임 허용 시 초기 상태 ---------- */

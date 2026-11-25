@@ -1,5 +1,8 @@
 /* ATELIER HUE — 모바일 퍼스트 */
 
+@font-face { font-family: "Bookk Myungjo"; font-weight: 300; font-style: normal; font-display: swap; src: url("../fonts/BookkMyungjo-Light.woff2") format("woff2"); }
+@font-face { font-family: "Bookk Myungjo"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/BookkMyungjo-Bold.woff2") format("woff2"); }
+
 :root {
   --bg: #e8e9eb;
   --ink: #26272a;
@@ -9,6 +12,7 @@
   --cream: #efece4;
   --gutter: 20px;
   --font: "Pretendard Variable", Pretendard, -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", sans-serif;
+  --serif: "Bookk Myungjo", "Nanum Myeongjo", "Noto Serif KR", serif;
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
@@ -21,6 +25,7 @@ body {
   font-family: var(--font);
   font-weight: 400;
   line-height: 1.6;
+  position: relative;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
 }
@@ -32,15 +37,22 @@ a { color: inherit; text-decoration: none; }
 
 .wrap { width: min(1120px, 100% - var(--gutter) * 2); margin-inline: auto; }
 
-/* 배경 천 캔버스 — 콘텐츠 뒤에 고정 */
+/* 배경 천 — 사진 속 천 이미지가 문서 전체에 걸쳐 흐른다 (콘텐츠 뒤) */
 #silk {
-  position: fixed;
+  position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  overflow: hidden;
   z-index: 0;
   pointer-events: none;
-  filter: blur(1.6px);
+}
+.silk__layer {
+  position: absolute;
+  left: 0;
+  max-width: none;
+  opacity: 0.92;
+  will-change: transform;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
 }
 main, .site-footer { position: relative; z-index: 1; }
 
@@ -101,36 +113,22 @@ main, .site-footer { position: relative; z-index: 1; }
 .site-header.is-open .menu-btn span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); }
 
 /* ---------- Hero ---------- */
-/* 좁은 화면: 사진 아래에 제목이 이어지는 세로 배치 (겹치지 않게) */
-.hero {
-  position: relative;
-  padding: 64px 0 56px;
-  background: linear-gradient(180deg, #c4c2c1 0%, #d2d1d1 50%, rgba(232, 233, 235, 0) 100%);
-  overflow: clip;
+/* 좁은 화면: 제목 → 사진 순서의 세로 배치 (겹치지 않게) */
+.hero { position: relative; padding: 96px 0 0; overflow: clip; }
+.hero__title { position: relative; z-index: 2; margin: 0 var(--gutter); color: var(--ink); font-weight: 300; }
+.hero__title .line--eyebrow { font-size: 0.875rem; letter-spacing: 0.2em; line-height: 1.6; }
+.hero__title .line--main {
+  margin-top: 0.1em;
+  font-family: var(--serif); font-weight: 300;
+  font-size: clamp(2.5rem, 12.5vw, 4rem); line-height: 1.3; letter-spacing: -0.01em; word-break: keep-all;
 }
-.hero__media {
-  position: relative;
-  width: min(100%, 520px);
-  margin-left: auto;
-}
+.hero__title .line--sub { margin-top: 0.5em; font-size: clamp(0.9375rem, 4vw, 1.25rem); line-height: 1.6; word-break: keep-all; }
+.hero__media { position: relative; margin-top: 28px; }
 .hero__media img {
-  width: 100%;
-  height: auto;
-  mix-blend-mode: multiply;
-  /* 왼쪽·위·아래 가장자리를 배경에 녹인다 */
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, transparent 0, #000 9%, #000 70%, transparent 100%);
-  -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, transparent 0, #000 9%, #000 70%, transparent 100%);
-  mask-composite: intersect;
+  width: 100%; height: auto; aspect-ratio: 4 / 3.4; object-fit: cover; object-position: 80% 30%;
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 70%, transparent 100%);
 }
-.hero__title {
-  position: relative;
-  margin: -8px var(--gutter) 0;
-  font-weight: 300;
-  color: var(--ink);
-}
-.hero__title .line:first-child { font-size: clamp(2.5rem, 11vw, 4rem); line-height: 1.1; letter-spacing: 0.01em; }
-.hero__title .line--sub { font-size: clamp(1.4rem, 5.4vw, 2rem); line-height: 1.4; margin-top: 0.2em; }
 
 /* ---------- Sections ---------- */
 .section { padding-block: clamp(72px, 12vw, 140px); }
@@ -170,11 +168,13 @@ main, .site-footer { position: relative; z-index: 1; }
 
 /* 방문 */
 .section--visit { padding-bottom: clamp(88px, 14vw, 160px); }
-.visit { display: grid; gap: 20px; align-items: center; }
+.visit { display: grid; gap: 20px; align-items: center; grid-template-areas: "intro" "map" "info"; }
 .visit__intro { font-size: 0.875rem; line-height: 1.8; word-break: keep-all; }
-.visit__map { overflow: hidden; aspect-ratio: 336 / 186; }
+.visit__intro { grid-area: intro; }
+.visit__map { grid-area: map; overflow: hidden; aspect-ratio: 4 / 3; }
+.visit__info { grid-area: info; }
 .visit__map svg { width: 100%; height: 100%; }
-.visit__map iframe { display: block; width: 100%; height: 100%; min-height: 190px; border: 0; filter: grayscale(1) contrast(0.95); }
+.visit__map iframe { display: block; width: 100%; height: 100%; border: 0; filter: grayscale(1) contrast(0.95); }
 .visit__info { background: rgba(240, 241, 243, 0.92); padding: 22px 24px; display: grid; gap: 18px; align-content: center; }
 .visit__info dt { font-size: 0.6875rem; color: var(--mute); }
 .visit__info dd { font-size: 0.9375rem; }
@@ -202,11 +202,7 @@ main, .site-footer { position: relative; z-index: 1; }
   .header-cta { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.8125rem; }
 
   /* 태블릿·작은 창: 사진을 메뉴 아래로 내리고, 제목은 화면 폭에 맞춰 줄인다 */
-  .hero { padding: 0; min-height: max(540px, calc(72px + 54vw)); }
-  .hero__media { position: absolute; top: 72px; right: 0; width: 58vw; margin: 0; }
-  .hero__title { position: absolute; left: max(var(--gutter), 8vw); top: 40%; margin: 0; }
-  .hero__title .line:first-child { font-size: clamp(2.75rem, 5.8vw, 5.2rem); }
-  .hero__title .line--sub { font-size: clamp(1.4rem, 2.6vw, 2.2rem); }
+  .hero__media img { aspect-ratio: 1920 / 900; object-position: 70% 50%; }
 
   .cards { grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .card__name { font-size: 1.25rem; }
@@ -224,19 +220,23 @@ main, .site-footer { position: relative; z-index: 1; }
   .news__desc { margin: 0; padding-right: 24px; }
   .news__date { margin: 0; min-width: 5.5em; text-align: right; }
 
-  .visit { grid-template-columns: 1fr 2fr 1fr; gap: 14px; align-items: stretch; }
+  .visit { grid-template-columns: 1fr 1fr; grid-template-areas: "intro info" "map map"; gap: 20px 14px; align-items: stretch; }
   .visit__intro { align-self: center; }
-  .visit__map { aspect-ratio: auto; min-height: 190px; }
+  .visit__map { aspect-ratio: auto; height: clamp(340px, 38vw, 520px); }
 }
 
-@media (min-width: 1200px) {
-  .hero { min-height: max(600px, 88svh, min(47vw, 796px)); }
-  .hero__media { top: 0; width: min(52vw, 880px); }
+@media (min-width: 1024px) {
+  .hero { padding: 0; min-height: max(560px, min(46.875vw, 94svh)); }
+  .hero__media { position: absolute; inset: 0; margin: 0; }
   .hero__media img {
-    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, #000 70%, transparent 100%);
-    mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, #000 70%, transparent 100%);
+    width: 100%; height: 100%; aspect-ratio: auto; object-position: 72% 50%;
+    -webkit-mask-image: linear-gradient(to bottom, #000 0, #000 76%, transparent 100%);
+    mask-image: linear-gradient(to bottom, #000 0, #000 76%, transparent 100%);
   }
-  .hero__title { left: 12.5vw; top: 34%; }
+  .hero__title { position: absolute; left: clamp(40px, 12.5vw, 280px); top: 33%; margin: 0; }
+  .hero__title .line--eyebrow { font-size: clamp(0.95rem, 1.45vw, 1.7rem); letter-spacing: 0.17em; }
+  .hero__title .line--main { font-size: clamp(3rem, 4.6vw, 5.6rem); }
+  .hero__title .line--sub { font-size: clamp(1.05rem, 1.65vw, 2rem); }
 }
 
 /* 마우스가 있는 기기에서만 hover */
@@ -267,7 +267,7 @@ main, .site-footer { position: relative; z-index: 1; }
 
   .js #silk, .js .site-header { opacity: 0; }
   .js [data-fade] { will-change: opacity, transform; }
-  .js .hero__media img { opacity: 0; transform: scale(1.12); }
+  .js .hero__media img { opacity: 0; transform: scale(1.06); }
   .js .hero__title .line__in,
   .js .section-head .line__in { transform: translateY(112%); }
   .js [data-fade] { opacity: 0; transform: translateY(14px); }
