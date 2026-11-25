@@ -4,7 +4,7 @@
 @font-face { font-family: "Bookk Myungjo"; font-weight: 700; font-style: normal; font-display: swap; src: url("../fonts/BookkMyungjo-Bold.woff2") format("woff2"); }
 
 :root {
-  --bg: #e8e9eb;
+  --bg: #e4e2e2;
   --ink: #26272a;
   --mute: #5f6166;
   --line: rgba(38, 39, 42, 0.16);
@@ -56,6 +56,12 @@ a { color: inherit; text-decoration: none; }
 }
 main, .site-footer { position: relative; z-index: 1; }
 
+/* 첫 번째 천은 히어로 바로 아래에서 시작하므로 위쪽 사라짐 구간을 짧게 */
+.silk__layer:first-child {
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 3%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 3%, #000 91%, transparent 100%);
+}
+
 /* 줄 마스크 (텍스트가 아래에서 올라오는 틀) */
 .line { display: block; overflow: hidden; padding-block: 0.08em; margin-block: -0.08em; }
 .line__in { display: block; }
@@ -73,7 +79,7 @@ main, .site-footer { position: relative; z-index: 1; }
   transition: background-color 0.3s ease, backdrop-filter 0.3s ease;
 }
 .site-header.is-solid, .site-header.is-open {
-  background: rgba(232, 233, 235, 0.78);
+  background: rgba(228, 226, 226, 0.78);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
 }
@@ -84,7 +90,7 @@ main, .site-footer { position: relative; z-index: 1; }
   position: absolute;
   top: 64px; left: 0; right: 0;
   padding: 8px var(--gutter) 24px;
-  background: rgba(232, 233, 235, 0.92);
+  background: rgba(228, 226, 226, 0.92);
   -webkit-backdrop-filter: blur(14px);
   backdrop-filter: blur(14px);
   visibility: hidden;
@@ -173,7 +179,7 @@ main, .site-footer { position: relative; z-index: 1; }
 .visit__info { grid-area: info; }
 .visit__map svg { width: 100%; height: 100%; }
 .visit__map iframe { display: block; width: 100%; height: 100%; border: 0; filter: grayscale(1) contrast(0.95); }
-.visit__info { background: rgba(240, 241, 243, 0.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); padding: 22px 24px; display: grid; gap: 18px; align-content: center; }
+.visit__info { background: rgba(238, 236, 236, 0.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); padding: 22px 24px; display: grid; gap: 18px; align-content: center; }
 .visit__info dt { font-size: 0.6875rem; color: var(--mute); }
 .visit__info dd { font-size: 0.9375rem; }
 

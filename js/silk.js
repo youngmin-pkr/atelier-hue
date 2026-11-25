@@ -26,7 +26,7 @@
     root.innerHTML = '';
     layers = [];
     var width = Math.max(W * 1.1, 960);                // 화면보다 넓게 깔아 일렁여도 가장자리가 안 보이게
-    var top = heroBottom - Math.min(160, width * 0.1);
+    var top = heroBottom - width * CLOTH.ratio * 0.09;   // 첫 천은 히어로 아래쪽의 흩날리는 천과 겹쳐 시작
     var i = 0;
     while (top < docH && i < 24) {
       var c = CLOTH;
