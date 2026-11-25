@@ -119,6 +119,7 @@
   });
 
   /* ---------- 일반 요소 페이드업 ([data-fade] 중 제목 부속이 아닌 것, [data-reveal]) ---------- */
+  var plain = $$('[data-fade]').filter(function (el) { return !el.classList.contains('section-head__sub'); });
   ScrollTrigger.batch(plain.concat($$('[data-reveal]')), {
     start: 'top 90%', once: true,
     onEnter: function (els) { gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.12 }); }
