@@ -101,36 +101,36 @@ main, .site-footer { position: relative; z-index: 1; }
 .site-header.is-open .menu-btn span:nth-child(2) { transform: translateY(-3px) rotate(-45deg); }
 
 /* ---------- Hero ---------- */
+/* 좁은 화면: 사진 아래에 제목이 이어지는 세로 배치 (겹치지 않게) */
 .hero {
   position: relative;
-  min-height: max(560px, 92svh);
+  padding: 64px 0 56px;
   background: linear-gradient(180deg, #c4c2c1 0%, #d2d1d1 50%, rgba(232, 233, 235, 0) 100%);
   overflow: clip;
 }
 .hero__media {
-  position: absolute;
-  top: 0; right: 0;
-  width: 100%;
-  will-change: transform;
+  position: relative;
+  width: min(100%, 520px);
+  margin-left: auto;
 }
 .hero__media img {
   width: 100%;
   height: auto;
   mix-blend-mode: multiply;
-  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, #000 70%, transparent 100%);
+  /* 왼쪽·위·아래 가장자리를 배경에 녹인다 */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, transparent 0, #000 9%, #000 70%, transparent 100%);
   -webkit-mask-composite: source-in;
-  mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, #000 70%, transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, transparent 0, #000 9%, #000 70%, transparent 100%);
   mask-composite: intersect;
 }
 .hero__title {
-  position: absolute;
-  left: var(--gutter);
-  bottom: clamp(56px, 12svh, 120px);
+  position: relative;
+  margin: -8px var(--gutter) 0;
   font-weight: 300;
   color: var(--ink);
 }
-.hero__title .line:first-child { font-size: clamp(2.5rem, 11vw, 5.2rem); line-height: 1.1; letter-spacing: 0.01em; }
-.hero__title .line--sub { font-size: clamp(1.4rem, 5.4vw, 2.2rem); line-height: 1.4; margin-top: 0.2em; }
+.hero__title .line:first-child { font-size: clamp(2.5rem, 11vw, 4rem); line-height: 1.1; letter-spacing: 0.01em; }
+.hero__title .line--sub { font-size: clamp(1.4rem, 5.4vw, 2rem); line-height: 1.4; margin-top: 0.2em; }
 
 /* ---------- Sections ---------- */
 .section { padding-block: clamp(72px, 12vw, 140px); }
@@ -200,9 +200,12 @@ main, .site-footer { position: relative; z-index: 1; }
   .nav a { min-height: 44px; font-size: 0.8125rem; border: 0; }
   .header-cta { display: inline-flex; align-items: center; min-height: 44px; font-size: 0.8125rem; }
 
-  .hero { min-height: max(600px, 88svh); }
-  .hero__media { width: min(58vw, 820px); }
-  .hero__title { left: max(var(--gutter), 12.5vw); bottom: auto; top: 34%; }
+  /* 태블릿·작은 창: 사진을 메뉴 아래로 내리고, 제목은 화면 폭에 맞춰 줄인다 */
+  .hero { padding: 0; min-height: max(540px, calc(72px + 54vw)); }
+  .hero__media { position: absolute; top: 72px; right: 0; width: 58vw; margin: 0; }
+  .hero__title { position: absolute; left: max(var(--gutter), 8vw); top: 40%; margin: 0; }
+  .hero__title .line:first-child { font-size: clamp(2.75rem, 5.8vw, 5.2rem); }
+  .hero__title .line--sub { font-size: clamp(1.4rem, 2.6vw, 2.2rem); }
 
   .cards { grid-template-columns: repeat(3, 1fr); gap: 12px; }
   .card__name { font-size: 1.25rem; }
@@ -224,7 +227,13 @@ main, .site-footer { position: relative; z-index: 1; }
 }
 
 @media (min-width: 1200px) {
-  .hero__media { width: min(52vw, 880px); }
+  .hero { min-height: max(600px, 88svh, min(47vw, 796px)); }
+  .hero__media { top: 0; width: min(52vw, 880px); }
+  .hero__media img {
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, #000 70%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 22%), linear-gradient(to bottom, #000 70%, transparent 100%);
+  }
+  .hero__title { left: 12.5vw; top: 34%; }
 }
 
 /* 마우스가 있는 기기에서만 hover */

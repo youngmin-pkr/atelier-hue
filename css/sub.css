@@ -193,3 +193,8 @@
   }
   @keyframes curtain-failsafe { to { visibility: hidden; opacity: 0; } }
 }
+
+/* 홈 상단: 메뉴 글자가 머리카락 사진 위에서도 읽히도록 옅은 후광 */
+@media (min-width: 1200px) {
+  body[data-page="home"] .site-header:not(.is-solid) .nav > ul > li > a { text-shadow: 0 0 6px #d0cecd, 0 0 10px #d0cecd, 0 0 14px #d0cecd; }
+}

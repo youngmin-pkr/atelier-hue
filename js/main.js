@@ -100,15 +100,18 @@
     gsap.delayedCall(0.3, intro);
   }
 
-  /* ---------- 홈 히어로: 사진은 느리게, 제목은 더 빨리 (R-03 변형) ---------- */
+  /* ---------- 홈 히어로: 사진은 느리게, 제목은 더 빨리 (R-03 변형) ----------
+     세로 배치인 좁은 화면에서는 서로 겹치므로 768px 이상에서만 적용한다. */
   if (document.querySelector('.hero')) {
-    gsap.to('.hero__media', {
-      yPercent: 9, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
-    });
-    gsap.to('.hero__title', {
-      y: -60, ease: 'none',
-      scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+    gsap.matchMedia().add('(min-width: 768px)', function () {
+      gsap.to('.hero__media', {
+        yPercent: 9, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
+      gsap.to('.hero__title', {
+        y: -60, ease: 'none',
+        scrollTrigger: { trigger: '.hero', start: 'top top', end: 'bottom top', scrub: true }
+      });
     });
   }
 
