@@ -17,7 +17,9 @@
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; word-break: keep-all; overflow-wrap: break-word; }   /* 줄바꿈은 어절(띄어쓰기) 단위로 */
+h1, h2, h3, .lead, .statement, .section-head__sub, .hero__title, .card__desc, .news__title { text-wrap: balance; }
+p, li, dd, summary { text-wrap: pretty; }
 body {
   margin: 0;
   background: var(--bg);
