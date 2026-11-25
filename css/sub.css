@@ -40,7 +40,7 @@
 .more a { display: inline-flex; align-items: center; min-height: 44px; border-bottom: 1px solid var(--ink); }
 .card__link::after { content: ""; position: absolute; inset: 0; }
 .card { position: relative; }
-.card__more { display: inline-block; margin-top: 12px; font-size: 0.8125rem; transition: transform 0.3s var(--ease); }
+.card__more { pointer-events: none; display: inline-block; margin-top: 12px; font-size: 0.8125rem; transition: transform 0.3s var(--ease); }
 @media (hover: hover) { .card:hover .card__more { transform: translateX(6px); } }
 
 /* ---------- 페이지 히어로 ---------- */

@@ -155,7 +155,6 @@
     var vt = gsap.timeline({ scrollTrigger: { trigger: visit, start: 'top 85%', once: true } });
     if (visit.querySelector('.visit__intro')) vt.to('.visit__intro', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' });
     vt.to('.visit__map', { clipPath: 'inset(0 0% 0 0)', duration: 1.3, ease: 'expo.out' }, 0)
-      .fromTo('.visit__pin', { opacity: 0, y: -26 }, { opacity: 1, y: 0, duration: 0.8, ease: 'back.out(2)' }, 0.9)
       .to('.visit__info', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.5);
   }
 
