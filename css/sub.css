@@ -178,7 +178,7 @@
   .steps .principles__no { font-size: 3rem; }
   .pager { grid-template-columns: 1fr 1fr; }
   .pager__next { text-align: right; }
-  .visit--wide { grid-template-columns: 2fr 1fr; grid-template-areas: "map info"; }
+  .visit--wide { grid-template-columns: 1fr; grid-template-areas: "map" "info"; }
   .visit--wide .visit__map { height: clamp(360px, 40vw, 560px); }
 }
 

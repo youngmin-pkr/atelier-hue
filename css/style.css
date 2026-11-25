@@ -51,8 +51,8 @@ a { color: inherit; text-decoration: none; }
   max-width: none;
   opacity: 0.92;
   will-change: transform;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 14%, #000 86%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%);
 }
 main, .site-footer { position: relative; z-index: 1; }
 
@@ -168,14 +168,12 @@ main, .site-footer { position: relative; z-index: 1; }
 
 /* 방문 */
 .section--visit { padding-bottom: clamp(88px, 14vw, 160px); }
-.visit { display: grid; gap: 20px; align-items: center; grid-template-areas: "intro" "map" "info"; }
-.visit__intro { font-size: 0.875rem; line-height: 1.8; word-break: keep-all; }
-.visit__intro { grid-area: intro; }
+.visit { display: grid; gap: 20px; align-items: center; grid-template-areas: "map" "info"; }
 .visit__map { grid-area: map; overflow: hidden; aspect-ratio: 4 / 3; }
 .visit__info { grid-area: info; }
 .visit__map svg { width: 100%; height: 100%; }
 .visit__map iframe { display: block; width: 100%; height: 100%; border: 0; filter: grayscale(1) contrast(0.95); }
-.visit__info { background: rgba(240, 241, 243, 0.92); padding: 22px 24px; display: grid; gap: 18px; align-content: center; }
+.visit__info { background: rgba(240, 241, 243, 0.55); -webkit-backdrop-filter: blur(10px); backdrop-filter: blur(10px); padding: 22px 24px; display: grid; gap: 18px; align-content: center; }
 .visit__info dt { font-size: 0.6875rem; color: var(--mute); }
 .visit__info dd { font-size: 0.9375rem; }
 
@@ -220,8 +218,8 @@ main, .site-footer { position: relative; z-index: 1; }
   .news__desc { margin: 0; padding-right: 24px; }
   .news__date { margin: 0; min-width: 5.5em; text-align: right; }
 
-  .visit { grid-template-columns: 1fr 1fr; grid-template-areas: "intro info" "map map"; gap: 20px 14px; align-items: stretch; }
-  .visit__intro { align-self: center; }
+  .visit { grid-template-columns: 1fr; grid-template-areas: "map" "info"; gap: 14px; align-items: stretch; }
+  .visit__info { grid-template-columns: repeat(3, 1fr); gap: 24px; padding: 26px 32px; }
   .visit__map { aspect-ratio: auto; height: clamp(340px, 38vw, 520px); }
 }
 

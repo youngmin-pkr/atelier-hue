@@ -119,7 +119,6 @@
   });
 
   /* ---------- 일반 요소 페이드업 ([data-fade] 중 제목 부속이 아닌 것, [data-reveal]) ---------- */
-  var plain = $$('[data-fade]').filter(function (el) { return !el.classList.contains('section-head__sub') && !el.classList.contains('visit__intro'); });
   ScrollTrigger.batch(plain.concat($$('[data-reveal]')), {
     start: 'top 90%', once: true,
     onEnter: function (els) { gsap.to(els, { opacity: 1, y: 0, duration: 1, ease: 'power3.out', stagger: 0.12 }); }
@@ -149,7 +148,6 @@
   var visit = document.querySelector('.visit');
   if (visit) {
     var vt = gsap.timeline({ scrollTrigger: { trigger: visit, start: 'top 85%', once: true } });
-    if (visit.querySelector('.visit__intro')) vt.to('.visit__intro', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' });
     vt.to('.visit__map', { clipPath: 'inset(0 0% 0 0)', duration: 1.3, ease: 'expo.out' }, 0)
       .to('.visit__info', { opacity: 1, y: 0, duration: 0.9, ease: 'power3.out' }, 0.5);
   }

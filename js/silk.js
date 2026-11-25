@@ -50,7 +50,7 @@
         flip: Math.floor(i / CLOTH.length) % 2 ? -1 : 1,   // 두 번째 바퀴는 좌우를 뒤집어 단조롭지 않게
         ph: i * 1.7
       });
-      top += h * 0.82 + 60;
+      top += h * 0.58;
       i++;
     }
     draw();
