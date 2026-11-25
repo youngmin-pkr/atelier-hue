@@ -10,12 +10,8 @@
   if (!root) return;
   var reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 이미지별 가로세로 비율(높이/너비)과 따라오는 정도(k가 클수록 더 느리게 보인다)
-  var CLOTH = [
-    { src: 'img/cloth-1.webp', ratio: 850 / 1920, k: 0.16 },
-    { src: 'img/cloth-2.webp', ratio: 1250 / 1920, k: 0.1 },
-    { src: 'img/cloth-3.webp', ratio: 815 / 1920, k: 0.2 }
-  ];
+  // 천 사진 한 장을 위아래로 뒤집어 가며 이어 붙인다 (끝 → 시작이 자연스럽게 만나도록)
+  var CLOTH = { src: 'img/cloth.webp', ratio: 1544 / 1018, k: 0.12 };
 
   var VH = 0, layers = [];
   var S = { scroll: 0, last: 0, vel: 0, t: 0 };
@@ -30,10 +26,10 @@
     root.innerHTML = '';
     layers = [];
     var width = Math.max(W * 1.1, 960);                // 화면보다 넓게 깔아 일렁여도 가장자리가 안 보이게
-    var top = heroBottom - Math.min(220, width * 0.15);
+    var top = heroBottom - Math.min(160, width * 0.1);
     var i = 0;
     while (top < docH && i < 24) {
-      var c = CLOTH[i % CLOTH.length];
+      var c = CLOTH;
       var h = width * c.ratio;
       var img = new Image();
       img.className = 'silk__layer';
@@ -47,10 +43,10 @@
       root.appendChild(img);
       layers.push({
         el: img, center: top + h / 2, h: h, k: c.k,
-        flip: Math.floor(i / CLOTH.length) % 2 ? -1 : 1,   // 두 번째 바퀴는 좌우를 뒤집어 단조롭지 않게
+        flip: 1, flipY: i % 2 ? -1 : 1,   // 한 장 걸러 위아래를 뒤집어 리본이 끊김 없이 이어지게
         ph: i * 1.7
       });
-      top += h * 0.58;
+      top += h * 0.98;
       i++;
     }
     draw();
@@ -74,7 +70,7 @@
         skew = v * 0.05;
       }
       L.el.style.transform = 'translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,0) rotate(' + rot.toFixed(3) +
-        'deg) skewX(' + skew.toFixed(2) + 'deg) scale(' + L.flip + ',' + sy.toFixed(4) + ')';
+        'deg) skewX(' + skew.toFixed(2) + 'deg) scale(' + L.flip + ',' + (L.flipY * sy).toFixed(4) + ')';
     }
   }
 

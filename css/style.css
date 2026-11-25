@@ -49,10 +49,10 @@ a { color: inherit; text-decoration: none; }
   position: absolute;
   left: 0;
   max-width: none;
-  opacity: 0.92;
+  opacity: 0.78;
   will-change: transform;
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%);
-  mask-image: linear-gradient(to bottom, transparent 0, #000 22%, #000 78%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
+  mask-image: linear-gradient(to bottom, transparent 0, #000 9%, #000 91%, transparent 100%);
 }
 main, .site-footer { position: relative; z-index: 1; }
 
@@ -138,7 +138,7 @@ main, .site-footer { position: relative; z-index: 1; }
 
 /* 컬렉션 */
 .cards { display: grid; gap: 48px; }
-.card__media { aspect-ratio: 232 / 305; overflow: hidden; background: #cfcac2; will-change: transform; }
+.card__media { aspect-ratio: 414 / 512; overflow: hidden; background: #cfcac2; will-change: transform; }
 .card__media img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease-out; }
 .card__body { padding-top: 18px; }
 .card__note { font-size: 0.6875rem; color: var(--mute); letter-spacing: 0.04em; }

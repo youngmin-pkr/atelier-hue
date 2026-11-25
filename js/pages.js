@@ -13,7 +13,7 @@
     document.title = p.name + ' — ATELIER HUE';
     var others = Object.keys(D.products).filter(function (k) { return k !== p.id; }).map(function (k) {
       var o = D.products[k];
-      return '<article class="card" data-reveal><div class="card__media"><img src="' + o.img + '" width="232" height="305" alt="' + o.alt + '"></div>' +
+      return '<article class="card" data-reveal><div class="card__media"><img src="' + o.img + '" width="414" height="512" alt="' + o.alt + '"></div>' +
         '<div class="card__body"><p class="card__note">' + o.note + '</p><h3 class="card__name"><a class="card__link" href="product.html?p=' + o.id + '">' + o.name + '</a></h3>' +
         '<p class="card__desc">' + o.tagline + '</p></div></article>';
     }).join('');
@@ -21,7 +21,7 @@
       '<section class="page-hero page-hero--product"><div class="wrap">' +
         '<nav class="crumbs" aria-label="경로" data-hero><a href="index.html">HOME</a><span>/</span><a href="collection.html">향수 컬렉션</a><span>/</span><span aria-current="page">' + p.name + '</span></nav>' +
         '<div class="product">' +
-          '<div class="product__media" data-hero><div class="product__frame"><img src="' + p.img + '" width="232" height="305" alt="' + p.alt + '"></div></div>' +
+          '<div class="product__media" data-hero><div class="product__frame"><img src="' + p.img + '" width="414" height="512" alt="' + p.alt + '"></div></div>' +
           '<div class="product__info">' +
             '<p class="eyebrow" data-hero>' + p.note + '</p>' +
             '<h1 class="page-title"><span class="line"><span class="line__in">' + p.name + '</span></span></h1>' +

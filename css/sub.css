@@ -82,7 +82,7 @@
 /* ---------- 컬렉션 · 상세 ---------- */
 .cards--two { grid-template-columns: 1fr; }
 .product { display: grid; gap: 36px; }
-.product__frame { aspect-ratio: 232 / 305; overflow: hidden; background: #cfcac2; max-width: 380px; }
+.product__frame { aspect-ratio: 414 / 512; overflow: hidden; background: #cfcac2; max-width: 380px; }
 .product__frame img { width: 100%; height: 100%; object-fit: cover; }
 .spec { display: grid; grid-template-columns: 1fr 1fr; gap: 0 24px; margin-top: 30px; border-top: 1px solid var(--line); }
 .spec > div { padding: 14px 0; border-bottom: 1px solid var(--line); }
